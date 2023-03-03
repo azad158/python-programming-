@@ -1,0 +1,59 @@
+from random import randint as r
+from time import time as t
+
+
+
+def new(ai,s,e,m):
+    
+    if ai <= m[s]:
+      
+        m.insert(s,ai)
+        return 
+    elif ai >= m[e]:
+     
+        m.insert(e+1,ai)
+        return 
+    elif e-s<=1 :
+      
+        m.insert(e,ai)
+        return 
+    else:
+        
+        c = (e-s+1)//3
+        mean=c+s
+        me=2*c+s
+        if m[s] < ai <=m[mean]: 
+            e=mean
+           
+           
+        elif m[me]<= ai < m[e]:
+            s=me
+            
+            
+        else:
+           
+            s=mean
+            e=me
+    new(ai,s,e,m)
+    
+    return False 
+
+
+while True :
+    n = int (input (' Entry your number of list =  '))
+    a= list (r(-n,n) for i in range (0,n))
+    print("startad")
+    n=len(a)
+    m = [a[0]]
+    ts=t()
+    for i in range(1,n):
+        lm = len( m)
+        
+        s=0
+        e=lm-1
+        ai=a[i]
+        new(ai,s,e,m)
+      
+    print (t()-ts)
+    a.sort()
+    print(m== a) 
